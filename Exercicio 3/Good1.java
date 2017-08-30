@@ -1,4 +1,4 @@
-package com.danielfireman.courses.map.abstractfactory;
+
 
 import java.io.IOException;
 import java.util.Collections;
@@ -13,6 +13,22 @@ class Good1 {
   interface FabricaDeCarro {
     CarroSedan criarCarroSedan();
     CarroPopular criarCarroPopular();
+  }
+  
+  class FabricaFord implements FabricaDeCarro {
+
+	@Override
+	public CarroSedan criarCarroSedan() {
+		// TODO Auto-generated method stub
+		return new Fusion();
+	}
+
+	@Override
+	public CarroPopular criarCarroPopular() {
+		// TODO Auto-generated method stub
+		return new KA(); 
+	}
+	  
   }
   class FabricaFiat implements FabricaDeCarro {
  
@@ -34,6 +50,26 @@ class Good1 {
     void exibirInfoSedan();
   }
   
+  class Fusion implements CarroSedan {
+
+	@Override
+	public void exibirInfoSedan() {
+		System.out.println("Ford Fusion");
+		
+	}
+	  
+  }
+  
+  class KA implements CarroPopular {
+
+	@Override
+	public void exibirInfoPopular() {
+		System.out.println("Modelo: Ford KA 2017");
+		
+	}
+	  
+  }
+  
   class Palio implements CarroPopular {
  
     @Override
@@ -49,7 +85,8 @@ class Good1 {
     }
   }
   public static void main(String[] args) {
-    FabricaDeCarro fabrica = new FabricaFiat();
+	Good1 g1 = new Good1();
+    FabricaDeCarro fabrica = g1.new FabricaFiat();
     CarroSedan sedan = fabrica.criarCarroSedan();
     CarroPopular popular = fabrica.criarCarroPopular();
     sedan.exibirInfoSedan();
@@ -57,7 +94,7 @@ class Good1 {
     popular.exibirInfoPopular();
     System.out.println();
  
-    fabrica = new FabricaFord();
+    fabrica = g1.new FabricaFord();
     sedan = fabrica.criarCarroSedan();
     popular = fabrica.criarCarroPopular();
     sedan.exibirInfoSedan();
